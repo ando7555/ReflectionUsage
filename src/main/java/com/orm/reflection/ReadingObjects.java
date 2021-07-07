@@ -2,6 +2,7 @@ package com.orm.reflection;
 
 import com.orm.reflection.models.Person;
 import com.orm.reflection.orm.EntityManager;
+import com.orm.reflection.orm.impl.ManagedEntityManager;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -9,7 +10,9 @@ import java.sql.SQLException;
 public class ReadingObjects {
 
     public static void main(String[] args) throws NoSuchMethodException, InstantiationException, SQLException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
-        EntityManager<Person> entityManager = EntityManager.of(Person.class);
+
+        BeanManager beanManager = BeanManager.getInstance();
+        EntityManager<Person> entityManager = beanManager.getInstance(ManagedEntityManager.class);
 
         Person linda = entityManager.find(Person.class, 1L);
         Person james = entityManager.find(Person.class,2L);

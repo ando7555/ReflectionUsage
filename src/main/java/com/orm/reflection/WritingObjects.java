@@ -2,13 +2,16 @@ package com.orm.reflection;
 
 import com.orm.reflection.models.Person;
 import com.orm.reflection.orm.EntityManager;
+import com.orm.reflection.orm.impl.ManagedEntityManager;
 
 import java.sql.SQLException;
 
 public class WritingObjects {
 
     public static void main(String[] args) throws SQLException, IllegalAccessException, ClassNotFoundException {
-        EntityManager<Person> entityManager = EntityManager.of(Person.class);
+        BeanManager beanManager = BeanManager.getInstance();
+
+        EntityManager<Person> entityManager = beanManager.getInstance(ManagedEntityManager.class);
 
         Person linda = new Person("Linda", 31);
         Person james = new Person("James", 24);
